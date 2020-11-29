@@ -73,14 +73,15 @@ public class Program {
 		e.removeAll(b);
 		System.out.println(e);
 		
-		Set<Product> prod = new HashSet<>();
+		Set<Product> prod = new TreeSet<>();
 		
 		prod.add(new Product("TV", 900.0));
-		prod.add(new Product("Notebooke", 1200.0));
+		prod.add(new Product("Notebook", 1200.0));
 		prod.add(new Product("Tablet", 400.0));
 		
-		Product p = new Product("Notebook", 1200.0);
-		System.out.println(set.contains(p));
+		for (Product product : prod) {
+			System.out.println(product.toString());
+		}
 		
 		
 	}
