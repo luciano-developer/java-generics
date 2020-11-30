@@ -1,12 +1,18 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import generics.demilitado.entities.LogEntries;
 import generics.demilitado.entities.Product;
 
 public class Program {
@@ -81,6 +87,31 @@ public class Program {
 		
 		for (Product product : prod) {
 			System.out.println(product.toString());
+		}
+		
+//		EXERCICIO 1
+		System.out.println();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Enter full path: ");
+		String path = sc.next();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(path))){
+			Set<LogEntries> setLog = new HashSet<>();
+			String line = br.readLine();
+			while (line!=null) {
+				String[] fields = line.split(" ");
+				String name = fields[0];
+				Date moment = Date.from(Instant.parse(fields[1]));
+				setLog.add(new LogEntries(name, moment));
+				line = br.readLine();
+			}
+			System.out.println("Totl users: " + setLog.size());
+			
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}finally {
+			sc.close();
 		}
 		
 		
